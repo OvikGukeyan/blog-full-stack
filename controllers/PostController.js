@@ -90,3 +90,31 @@ export const create = async (req, res) => {
         })
     }
 }
+
+export const update = async (req, res) => {
+    try {
+        const postId = req.params.id;
+        
+        await PostModel.findOneAndUpdate(
+            {
+                _id: postId,
+            },
+            {
+                title: req.body.title,
+                text: req.body.text,
+                tags: req.body.tags,
+                imageUrl: req.body.imageUrl,
+                user: req.userId
+            }
+        )
+
+        res.json({
+            success: true
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            massage: 'Failed to update article!'
+        })
+    }
+}
