@@ -18,7 +18,6 @@ export const getLastTags = async (req, res) => {
 export const getAll = async (req, res) => {
     try {
         const posts = await PostModel.find().populate('user').exec();
-
         res.json(posts);
     } catch (error) {
         console.log(error);
@@ -89,7 +88,7 @@ export const create = async (req, res) => {
         const doc = new PostModel({
             title: req.body.title,
             text: req.body.text,
-            tags: req.body.tags,
+            tags: req.body.tags.split(','),
             imageUrl: req.body.imageUrl,
             user: req.userId
         })

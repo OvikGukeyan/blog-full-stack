@@ -34,8 +34,6 @@ export const register = async (req, res) => {
             massage: 'Failed to register!'
         })
     }
-
-
 };
 
 export const login = async (req, res) => {
@@ -86,7 +84,7 @@ export const getMe = async(req, res) => {
 
         const { passwordHash, ...userData } = user._doc;
 
-        res.json({ userData })
+        res.json({ ...userData })
     } catch (error) {
         console.log(error)
         res.status(500).json({
