@@ -10,9 +10,10 @@ import {UserController, PostController} from './controllers/index.js';
 
 import {handleValidationErrors, checkAuth} from './utils/index.js';
 
+// const MONGODB_URI = 'mongodb+srv://admin:cjh0RTbuioCIBQ3f@cluster0.dbo7krm.mongodb.net/blog?retryWrites=true&w=majority'
 
 mongoose
-    .connect('mongodb+srv://admin:cjh0RTbuioCIBQ3f@cluster0.dbo7krm.mongodb.net/blog?retryWrites=true&w=majority')
+    .connect(process.env.MONGODB_URI)
     .then(() => { console.log('DB ok') })
     .catch((err) => { console.log('DB Error', err) })
 
@@ -53,7 +54,7 @@ app.patch('/posts/:id', checkAuth, postCreateValidation, handleValidationErrors,
 
 const PORT = 777;
 
-app.listen(PORT, (err) => {
+app.listen(process.env.PORT || PORT, (err) => {
     if (err) {
         return console.log(err)
     }
